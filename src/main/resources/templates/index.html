@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<style>
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+ 	padding: 14px 20px;
+    
+    margin: 15px 90px;
+    width: 30%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+
+
+
+/* Add padding to containers */
+.container {
+    padding-left: 30%;
+    padding-top: 10%;
+}
+
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding-right: 10%;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+}
+</style>
+</head>
+<body bgcolor="cyan">
+
+<div align="center"><h2>Policy Management System</h2></div>
+<hr/>
+<div align="right" style="padding-right: 5%">
+
+<ul>
+  <li><a href="#contact">Contact Us</a></li>
+  <li><a href="#about">About Us</a></li>
+  <li><a th:href="@{/register}" href="#" th>Register</a></li>
+</ul>
+
+</div>
+
+ <form autocomplete="off" action="#" th:action="@{/plms/ui/checkPassword}"
+        th:object="${user}" method="post" class="m-t" role="form"
+        data-toggle="validator">
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" th:field="*{username}"
+    name="name"  required>
+	<br/>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" th:field="*{passwordtext}"
+    name="psw" required>
+<br/>
+    <button type="submit">Login</button>
+  </div>
+
+</form>
+
+    <p th:text="'Hello, ' + ${name} + '!'" />
+    
+</body>
+</html>

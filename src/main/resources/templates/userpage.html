@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<style>
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+ 	padding: 14px 20px;
+    
+    margin: 15px 90px;
+    width: 30%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+
+
+
+/* Add padding to containers */
+.container {
+    padding-left: 30%;
+    padding-top: 10%;
+}
+
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding-right: 10%;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding-left: 20px;
+}
+</style>
+</head>
+<body bgcolor="cyan">
+
+<div align="center"><h2>UserPage</h2></div>
+<hr/>
+<div align="right" style="padding-right: 5%">
+
+<ul>
+  <li><a th:href="@{/plmsclient}" href="#" th>Logout</a></li>
+</ul>
+
+</div>
+<p th:text="'Welcome ' + ${name} + '!'" />
+<br/>
+<div>Available Policies</div>
+<br/>
+<table>
+<tbody>
+<tr>
+<th>S.No.</th>
+<th>Policy Name</th>
+<th>Policy Details</th>
+</tr>
+    <tr th:each="availablePolicy: ${aps}">
+        <td th:text="${availablePolicy.policyid}" />
+        <td th:text="${availablePolicy.policyname}" />
+         <td th:text="${availablePolicy.policydetails}" />
+    </tr>
+</tbody>
+</table>
+    <br/>
+<div><p th:text="${name} + ' Policy Details'" /></div>
+<br/>
+<table>
+<tbody>
+<tr>
+<th>Policy Number</th>
+<th>Policy Name</th>
+<th>Amount</th>
+<th>Policy End Date</th>
+<th>Valid</th>
+</tr>
+    <tr th:each="userPolicy: ${up}">
+        <td th:text="${userPolicy.policynumber}" />
+        <td th:text="${aps[userPolicy.policyid - 1].policyname}"></td>
+        <td th:text="${userPolicy.amount}" />
+        <td th:text="${#calendars.format(userPolicy.policyenddate,'dd/MM/yyyy')}" />
+        <td>
+        <div th:switch="${userPolicy.policyenddate.before(#dates.createNow())}">
+    		<span th:case="true">No</span>
+    		<span th:case="false">Yes</span>
+</div>
+    </td>
+    </tr>
+</tbody>
+</table>
+<br/><br/><br/>
+</body>
+</html>
